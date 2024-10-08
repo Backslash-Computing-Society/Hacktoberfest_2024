@@ -1,45 +1,88 @@
-# Hacktoberfest_2024 🚀 
+## Hacktoberfest-2024
+    
 
-Use this project to make your first contribution to an open source project on GitHub. Practice making your first pull request to a public repository before doing the real thing!
+# Submit your PR on this new repo [Hacktoberfest](https://github.com/Backslash-Computing-Society/Hacktoberfest_2024). We are merging all PRs there.
 
-Celebrate [Hacktoberfest](https://hacktoberfest.digitalocean.com/) by getting involved in the open source community by completing some simple tasks in this project.
+In this current repo, there are a lot of conflicts; we are not merging until all conflicts are resolved. Hacktoberfest { [Live Website](https://fineanmol.github.io/Hacktoberfest2024/) }
 
-This repository is open to all members of the GitHub community. Any member may contribute to this project without being a collaborator.
+**This is a beginner-friendly project to help you get started with your [Hacktoberfest](https://hacktoberfest.com/). Please read the contribution rules. Happy Learning <3 💙 !!**
 
-[https://alicewonderland.github.io/hacktoberfest/](https://alicewonderland.github.io/hacktoberfest/)
+P.S. Star ⭐ and share this repository if you had fun!! 😍
 
-## What is Hacktoberfest?
-A month-long celebration from October 1st - 31st sponsored by [Digital Ocean](https://hacktoberfest.digitalocean.com/) and [GitHub](https://github.com/blog/2433-celebrate-open-source-this-october-with-hacktoberfest) to get people involved in [Open Source](https://github.com/open-source). Create your very first pull request to any public repository on GitHub and contribute to the open source developer community.
+Hacktoberfest 2024
 
-[https://hacktoberfest.digitalocean.com/](https://hacktoberfest.digitalocean.com/)
 
-## How to contribute to this project
-* Fork this repository (Click the Fork button in the top right of this page, click your Profile Image)
-* Clone your fork down to your local machine
+# Contribution Rules📚:
 
-```markdown
-git clone https://github.com/your-username/hacktoberfest.git
+- You are allowed to make pull requests that break the rules. We just merge it ;)
+- Do NOT add any build steps, e.g., npm install (we want to keep this a simple static site)
+- Do NOT remove other content.
+- Styling/code can be pretty, ugly, or stupid, big or small, as long as it works
+<!-- - Add your name to the contributorsList file. -->
+- Try to keep pull requests small to minimize merge conflicts
+
+## Getting Started 🤩🤗:
+
+- Fork this repo (button on top)
+- Clone it on your local machine
+
+```terminal
+git clone https://github.com/fineanmol/Hacktoberfest2024.git
 ```
 
-* Create a branch
+- Navigate to the project directory.
 
-```markdown
-git checkout -b branch-name
+```terminal
+cd Hacktoberfest2024
 ```
 
-* Make your changes (choose from any task below)
-* Commit and push
+- Create a new branch
+
+```markdown
+git checkout -b my-new-branch
+```
+
+<!--- - Add your name to `contributors/contributorsList.js`. -->
 
 ```markdown
 git add .
-git commit -m 'Commit message'
-git push origin branch-name
 ```
 
-* Create a new pull request from your forked repository (Click the `New Pull Request` button located at the top of your repo)
-* Wait for your PR review and merge approval!
-* __Star this repository__ if you had fun!
+- Commit your changes.
 
-## BONUS!
-* See profiles submitted by fellow coders from around the globe ... from Kathmandu to Copenhagen.
-* Discover some obscure to new and trending languages ... from BrainFuck to Groovy.
+```markdown
+git commit -m "Relevant message"
+```
+
+- Then push
+
+```markdown
+git push origin my-new-branch
+```
+
+- Create a new pull request from your forked repository
+
+
+## Avoid Conflicts {Syncing your fork}
+
+An easy way to avoid conflicts is to add an 'upstream' for your git repo, as other PRs may be merged while you're working on your branch/fork.   
+
+```terminal
+git remote add upstream https://github.com/fineanmol/Hacktoberfest2024
+```
+
+You can verify that the new remote has been added by typing:
+
+```terminal
+git remote -v
+```
+
+To pull any new changes from your parent repo, simply run:
+
+```terminal
+git merge upstream/master
+```
+
+This will give you any eventual conflicts and allow you to easily solve them in your repo. It's a good idea to use it frequently in between your own commits to make sure that your repo is up to date with its parent.
+
+For more information on syncing forks, [read this article from GitHub](https://help.github.com/articles/syncing-a-fork/).
