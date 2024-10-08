@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create Issues
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6  # Use the latest version to avoid the node12/node16 deprecation warnings
         with:
           script: |
             const issues = [
@@ -27,7 +27,7 @@ jobs:
             ];
 
             for (const issue of issues) {
-              await github.issues.create({
+              await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title: issue.title,
