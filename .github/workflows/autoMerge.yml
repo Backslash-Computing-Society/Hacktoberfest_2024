@@ -13,6 +13,7 @@ jobs:
     permissions:
       pull-requests: write
       contents: write
+
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
@@ -22,14 +23,14 @@ jobs:
         run: |
           if git merge-base --is-ancestor origin/main HEAD; then
             echo "No conflicts."
-            echo "::set-output name=has_conflicts::false"
+            echo "has_conflicts=false" >> $GITHUB_ENV  # Use environment variable instead of set-output
           else
             echo "Conflicts detected!"
-            echo "::set-output name=has_conflicts::true"
+            echo "has_conflicts=true" >> $GITHUB_ENV  # Use environment variable instead of set-output
           fi
 
       - name: Merge the pull request
-        if: steps.conflict_check.outputs.has_conflicts == 'false'
+        if: env.has_conflicts == 'false'  # Use environment variable here
         uses: actions/github-script@v6
         with:
           script: |
@@ -42,7 +43,7 @@ jobs:
             console.log("Pull request merged!");
 
       - name: Add 'hacktoberfest-accepted' label
-        if: steps.conflict_check.outputs.has_conflicts == 'false'
+        if: env.has_conflicts == 'false'  # Use environment variable here
         uses: actions/github-script@v6
         with:
           script: |
@@ -55,7 +56,7 @@ jobs:
             console.log("Added 'hacktoberfest-accepted' label.");
 
       - name: Comment on the pull request
-        if: steps.conflict_check.outputs.has_conflicts == 'false'
+        if: env.has_conflicts == 'false'  # Use environment variable here
         uses: actions/github-script@v6
         with:
           script: |
@@ -68,7 +69,7 @@ jobs:
             console.log("Commented on the pull request.");
 
       - name: Comment if conflicts are detected
-        if: steps.conflict_check.outputs.has_conflicts == 'true'
+        if: env.has_conflicts == 'true'  # Use environment variable here
         uses: actions/github-script@v6
         with:
           script: |
