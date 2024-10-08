@@ -18,32 +18,23 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v3
 
-      - name: Check for conflicts
-        id: conflict_check
-        run: |
-          if git merge-base --is-ancestor origin/main HEAD; then
-            echo "No conflicts."
-            echo "has_conflicts=false" >> $GITHUB_ENV  # Use environment variable instead of set-output
-          else
-            echo "Conflicts detected!"
-            echo "has_conflicts=true" >> $GITHUB_ENV  # Use environment variable instead of set-output
-          fi
-
-      - name: Merge the pull request
-        if: env.has_conflicts == 'false'  # Use environment variable here
+      - name: Attempt to merge the pull request
         uses: actions/github-script@v6
         with:
           script: |
-            await github.rest.pulls.merge({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number,
-              merge_method: 'squash'  # Use 'merge' for regular merge, 'squash' for squash merge
-            });
-            console.log("Pull request merged!");
+            try {
+              await github.rest.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                merge_method: 'squash'  # Use 'merge' for regular merge, 'squash' for squash merge
+              });
+              console.log("Pull request merged!");
+            } catch (error) {
+              console.error("Error merging pull request:", error.message);
+            }
 
       - name: Add 'hacktoberfest-accepted' label
-        if: env.has_conflicts == 'false'  # Use environment variable here
         uses: actions/github-script@v6
         with:
           script: |
@@ -56,7 +47,6 @@ jobs:
             console.log("Added 'hacktoberfest-accepted' label.");
 
       - name: Comment on the pull request
-        if: env.has_conflicts == 'false'  # Use environment variable here
         uses: actions/github-script@v6
         with:
           script: |
@@ -67,16 +57,3 @@ jobs:
               body: "PR has been automatically merged and labeled as `hacktoberfest-accepted`. Thank you for your contribution!"
             });
             console.log("Commented on the pull request.");
-
-      - name: Comment if conflicts are detected
-        if: env.has_conflicts == 'true'  # Use environment variable here
-        uses: actions/github-script@v6
-        with:
-          script: |
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.payload.pull_request.number,
-              body: "PR cannot be merged automatically due to conflicts. Please resolve the conflicts and reopen the PR."
-            });
-            console.log("Notified user about conflicts.");
