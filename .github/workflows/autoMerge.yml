@@ -1,0 +1,81 @@
+name: Auto-Merge PRs
+
+on:
+  pull_request:
+    types: 
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Check for conflicts
+        id: conflict_check
+        run: |
+          if git merge-base --is-ancestor origin/main HEAD; then
+            echo "No conflicts."
+            echo "::set-output name=has_conflicts::false"
+          else
+            echo "Conflicts detected!"
+            echo "::set-output name=has_conflicts::true"
+          fi
+
+      - name: Merge the pull request
+        if: steps.conflict_check.outputs.has_conflicts == 'false'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              merge_method: 'squash'  # Use 'merge' for regular merge, 'squash' for squash merge
+            });
+            console.log("Pull request merged!");
+
+      - name: Add 'hacktoberfest-accepted' label
+        if: steps.conflict_check.outputs.has_conflicts == 'false'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              labels: ['hacktoberfest-accepted']
+            });
+            console.log("Added 'hacktoberfest-accepted' label.");
+
+      - name: Comment on the pull request
+        if: steps.conflict_check.outputs.has_conflicts == 'false'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: "PR has been automatically merged and labeled as `hacktoberfest-accepted`. Thank you for your contribution!"
+            });
+            console.log("Commented on the pull request.");
+
+      - name: Comment if conflicts are detected
+        if: steps.conflict_check.outputs.has_conflicts == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: "PR cannot be merged automatically due to conflicts. Please resolve the conflicts and reopen the PR."
+            });
+            console.log("Notified user about conflicts.");
