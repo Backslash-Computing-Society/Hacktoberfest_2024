@@ -1,0 +1,38 @@
+name: Create Hacktoberfest Issues
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create_issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Issues
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const issues = [
+              { title: "Reverse a string", body: "Implement a function to reverse a string." },
+              { title: "Check if a string is a palindrome", body: "Write a function to check if a string is a palindrome." },
+              { title: "Count vowels in a string", body: "Count the number of vowels in the given string." },
+              { title: "Find first non-repeating character", body: "Find the first non-repeating character in a string." },
+              { title: "Count occurrences of characters in a string", body: "Write a program to count the occurrence of each character in a string." },
+              { title: "Longest word in a sentence", body: "Find the longest word in a given sentence." },
+              { title: "Merge two sorted arrays", body: "Write a function to merge two sorted arrays into one." },
+              { title: "Find the second largest element in an array", body: "Find the second largest element in an array." },
+              { title: "Find the missing number in an array", body: "Find the missing number from an array of 1 to N." },
+              { title: "Reverse an array", body: "Reverse an array of integers." },
+              // Add more issues up to 80
+            ];
+
+            for (const issue of issues) {
+              await github.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issue.title,
+                body: issue.body,
+                labels: ['hacktoberfest-accepted']
+              });
+            }
