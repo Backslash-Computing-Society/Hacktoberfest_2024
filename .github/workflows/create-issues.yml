@@ -8,9 +8,11 @@ on:
 jobs:
   create_issues:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write  # This grants permission to write (create/edit) issues
     steps:
       - name: Create Issues
-        uses: actions/github-script@v6  # Use the latest version to avoid the node12/node16 deprecation warnings
+        uses: actions/github-script@v6
         with:
           script: |
             const issues = [
