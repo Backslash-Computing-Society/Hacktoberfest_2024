@@ -24,7 +24,6 @@ jobs:
               { title: "Find the second largest element in an array", body: "Find the second largest element in an array." },
               { title: "Find the missing number in an array", body: "Find the missing number from an array of 1 to N." },
               { title: "Reverse an array", body: "Reverse an array of integers." },
-              // Add more issues up to 80
             ];
 
             for (const issue of issues) {
