@@ -1,15 +1,14 @@
-name: Auto-Merge PRs
+name: Hacktoberfest Auto-Merge PRs
 
 on:
   pull_request:
     types: 
-      - opened
-      - reopened
-      - synchronize
+      - labeled
 
 jobs:
   automerge:
     runs-on: ubuntu-latest
+    if: github.event.label.name == 'hacktoberfest-accepted'
     permissions:
       pull-requests: write
       contents: write
@@ -21,39 +20,31 @@ jobs:
       - name: Attempt to merge the pull request
         uses: actions/github-script@v6
         with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             try {
               await github.rest.pulls.merge({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                pull_number: context.payload.pull_request.number,
-                merge_method: 'merge'  # Use 'merge' for regular merge, 'squash' for squash merge
+                pull_number: context.issue.number,
+                merge_method: 'squash'
               });
-              console.log("Pull request merged!");
+              console.log("Pull request merged successfully!");
             } catch (error) {
               console.error("Error merging pull request:", error.message);
+              core.setFailed("Failed to merge pull request: " + error.message);
             }
 
-      - name: Add 'hacktoberfest-accepted' label
-        uses: actions/github-script@v6
-        with:
-          script: |
-            await github.rest.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.payload.pull_request.number,
-              labels: ['hacktoberfest-accepted']
-            });
-            console.log("Added 'hacktoberfest-accepted' label.");
-
       - name: Comment on the pull request
+        if: success()
         uses: actions/github-script@v6
         with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.payload.pull_request.number,
-              body: "PR has been automatically merged and labeled as `hacktoberfest-accepted`. Thank you for your contribution!"
+              issue_number: context.issue.number,
+              body: "Thank you for your contribution! Your PR has been automatically merged for Hacktoberfest. 🎉"
             });
             console.log("Commented on the pull request.");
