@@ -7,12 +7,14 @@ on:
       - reopened
       - synchronize
 
+permissions: {}  # Reset all permissions
+
 jobs:
   automerge:
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: write
       contents: write
+      pull-requests: write
 
     steps:
       - name: Checkout the repository
