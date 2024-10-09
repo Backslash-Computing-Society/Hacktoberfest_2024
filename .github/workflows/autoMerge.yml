@@ -28,7 +28,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
-                merge_method: 'squash'
+                merge_method: 'merge'
               });
               console.log("Pull request merged successfully!");
             } catch (error) {
