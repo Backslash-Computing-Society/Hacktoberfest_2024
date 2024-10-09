@@ -7,8 +7,6 @@ on:
       - reopened
       - synchronize
 
-permissions: {}  # Reset all permissions
-
 jobs:
   automerge:
     runs-on: ubuntu-latest
