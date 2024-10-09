@@ -1,7 +1,7 @@
 ## Hacktoberfest-2024
     
 
-# Submit your PR on this new repo [Hacktoberfest](https://github.com/Backslash-Computing-Society/Hacktoberfest_2024). We are merging all PRs there.
+# Submit your PR on this new repo [Hacktoberfest](https://github.com/Backslash-Computing-Society/Hacktoberfest_2024). We are merging all PRs here.
 
 In this current repo, there are a lot of conflicts; we are not merging until all conflicts are resolved. Hacktoberfest { [Live Website](https://fineanmol.github.io/Hacktoberfest2024/) }
 
