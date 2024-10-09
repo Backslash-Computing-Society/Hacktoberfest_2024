@@ -15,6 +15,9 @@ jobs:
       pull-requests: write
 
     steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+        
       - name: Attempt to merge the pull request
         uses: actions/github-script@v6
         with:
