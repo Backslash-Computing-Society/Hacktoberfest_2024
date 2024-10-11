@@ -1,9 +1,11 @@
 ## Hacktoberfest-2024
     
 
-# Submit your PR on this new repo [Hacktoberfest](https://github.com/Backslash-Computing-Society/Hacktoberfest_2024). We are merging all PRs there.
+# 🎃 HacktoberFest Starter Project 🎃
 
-In this current repo, there are a lot of conflicts; we are not merging until all conflicts are resolved. Hacktoberfest { [Live Website](https://fineanmol.github.io/Hacktoberfest2024/) }
+Use this project to make your first contribution to an open source project on GitHub. Practice making your first pull request to a public repository before doing the real thing!
+
+Celebrate [Hacktoberfest](https://hacktoberfest.digitalocean.com/) by getting involved in the open source community by completing some simple tasks in this project.
 
 **This is a beginner-friendly project to help you get started with your [Hacktoberfest](https://hacktoberfest.com/). Please read the contribution rules. Happy Learning <3 💙 !!**
 
