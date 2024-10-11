@@ -7,8 +7,6 @@ on:
       - reopened
       - synchronize
 
-permissions: {}  # Reset all permissions
-
 jobs:
   automerge:
     runs-on: ubuntu-latest
@@ -19,18 +17,19 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
-
+        
       - name: Attempt to merge the pull request
         uses: actions/github-script@v6
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             try {
+              const pull_number = context.payload.pull_request.number;
               await github.rest.pulls.merge({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                pull_number: context.issue.number,
-                merge_method: 'squash'
+                pull_number: pull_number,
+                merge_method: 'merge'
               });
               console.log("Pull request merged successfully!");
             } catch (error) {
@@ -42,12 +41,13 @@ jobs:
         if: success()
         uses: actions/github-script@v6
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const pull_number = context.payload.pull_request.number;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
+              issue_number: pull_number,
               body: "Thank you for your contribution! Your PR has been automatically merged. 🎉"
             });
             console.log("Commented on the pull request.");
