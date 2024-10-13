@@ -29,7 +29,7 @@ class Solution {
 
 
 
-   of a list and an int, appends a new node at the end  */
+   of a list and an int, appends a new node at the end  
 void append(struct Node **head_ref, int new_data) {
     
     struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
