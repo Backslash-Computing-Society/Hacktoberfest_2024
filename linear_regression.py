@@ -24,7 +24,7 @@ def linear_regression(X, Y, learning_rate=0.01, epochs=10000):
         m -= learning_rate * m_gradient
         b -= learning_rate * b_gradient
 
-    return m, b
+    return (m, b)  # Return a tuple
 
 
 if __name__ == "__main__":
