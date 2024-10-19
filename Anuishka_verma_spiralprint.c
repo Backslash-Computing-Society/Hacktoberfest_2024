@@ -4,6 +4,7 @@ int main(){
     printf("enter the number of rows & columns : ");
     scanf("%d %d", &r, &c);
     int ar[r][c];
+
     //input matrix
     printf("enter the values to first matrix : ");
     for(int i=0; i<r; i++){
@@ -11,6 +12,7 @@ int main(){
             scanf("%d", &ar[i][j]);
         }
     }
+
     //print matrix
     printf(" first matrix is ; \n");
     for (int i = 0; i < r; i++) {
@@ -19,11 +21,12 @@ int main(){
         }
         printf("\n"); 
       }
+      
     //printing spiral
     int minr = 0, maxr =r-1, minc=0, maxc=c-1;
     int count = 0;
     while(count < (r*c)){
-    for(int j = minc; j<=maxc && count != r*c ;j++){     //or we can use 
+    for(int j = minc; j<=maxc && count != r*c ;j++){     //or we can use breAK
             printf("%d \t", ar[minr][j]);
             count++;
         } minr++;                   //if(count >= r*c) break;
