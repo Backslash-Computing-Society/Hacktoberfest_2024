@@ -66,6 +66,7 @@ git push origin my-new-branch
 
 
 ## Avoid Conflicts {Syncing your fork}
+Name your project as Your_Name_Project_Name and tag one of the issues that we have created.
 
 An easy way to avoid conflicts is to add an 'upstream' for your git repo, as other PRs may be merged while you're working on your branch/fork.   
 
