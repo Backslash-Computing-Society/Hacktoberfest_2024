@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
-//hello here i solved the issue 13 
+//hello here i solved the issue 13-v1 
+
 
 int countVowels(char str[]) {
     int count = 0;
