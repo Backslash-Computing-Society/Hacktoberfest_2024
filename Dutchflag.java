@@ -1,7 +1,7 @@
 
 import java.util.*;
 
-public class dutchFlag {
+public class Dutchflag {
     public static void sortArray(ArrayList<Integer> arr, int n) {
         int low = 0, mid = 0, high = n - 1; // 3 pointers
 
