@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/RPS-imp_style-org.css">
+        <script src="Js/RPS-js-org.js"></script>
+        <title>
+            Rocks nd Scrs
+        </title>
+    </head>
+    <body style="
+    background-color:
+     rgb(173, 113, 33);
+     font-family:'Courier New', Courier, monospace;
+     color:burlywood;
+     font-size: 15px;
+    ">
+
+    <div class="div">
+        
+        <p class="Head">Rock Paper Scissors</p>
+
+        <button class="rck" onclick="
+        const ken =genr()
+        myMovegen('Rock',ken);
+        " st><img  class="rok " src="YouTube Clone/icons/The-Rock-PNG-File.webp"></button>
+    
+        <button class="ppr" onclick="
+        const ken = genr()
+        myMovegen('Paper', ken) ;
+        "><img  class="papr " src="YouTube Clone/icons/roll-of-paper-google.webp"></button>
+
+        <button class="scr" onclick="
+        const ken = genr()
+        myMovegen('Scissor',ken);
+        "><img  class="scz " src="YouTube Clone/icons/scissor.webp"></button>
+        <button class="rest" onclick="
+        resetScore()    
+        updateScore();"
+        >Reset Score</button>
+
+    </div>
+
+    <div class="paras">
+        <p class="js-result"><img src=""></p>
+        <p class="js-moves"> <img src=""> </p>
+        <p class="js-score"></p>
+    </div>
+   
+
+    
+    </body>
+
+</html>
+    
